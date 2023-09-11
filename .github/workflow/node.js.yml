@@ -36,5 +36,5 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           # Replace with your deployment commands for the prod environment
-          echo "Deploying to the prod environments"
+          echo "Deploying to the prod environment"
           cd /home/ec2-user/workspace/cicd-githubactions && git pull origin main && npm install
