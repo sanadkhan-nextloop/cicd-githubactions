@@ -30,8 +30,8 @@ jobs:
         run: |
           # Replace with your deployment commands for the dev environment
           echo "Deploying to the dev environment"
-          npm install -prefix /home/ec2-user/workspace/cicd-githubactions/dev
-          
+          ssh -i ${{ secrets.SSH_KEY_PATH }} ec2-user@13.127.189.205 "cd /home/ec2-user/workspace/cicd-githubactions/dev && git pull origin dev && npm install"
+
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
         run: |
