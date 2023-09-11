@@ -30,7 +30,7 @@ jobs:
         run: |
           # Replace with your deployment commands for the dev environment
           echo "Deploying to the dev environment"
-          npm install
+          cd /home/ec2-user/workspace/cicd-githubactions && git pull origin dev && npm install
 
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
