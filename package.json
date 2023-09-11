@@ -1,0 +1,23 @@
+{
+  "name": "cicd-githubactions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanadkhan-nextloop/cicd-githubactions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanadkhan-nextloop/cicd-githubactions/issues"
+  },
+  "homepage": "https://github.com/sanadkhan-nextloop/cicd-githubactions#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
