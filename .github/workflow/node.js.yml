@@ -37,4 +37,4 @@ jobs:
         run: |
           # Replace with your deployment commands for the prod environment
           echo "Deploying to the prod environment"
-          ssh -i /path/to/your/prod-key.pem ec2-user@your-prod-instance-ip "cd /path/to/prod/project && git pull origin main && npm install && npm run build && pm2 restart your-prod-app-name"
+          "cd /home/ec2-user/workspace/cicd-githubactions && git pull origin main && npm install"
