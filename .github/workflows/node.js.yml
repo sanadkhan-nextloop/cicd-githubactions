@@ -30,7 +30,9 @@ jobs:
         run: |
           # Replace with your deployment commands for the dev environment
           echo "Deploying to the dev environment"
-          ssh -i ${{ secrets.SSH_KEY_PATH }} ec2-user@13.127.189.205 \
+          ssh -i ${{ secrets.SSH_KEY_PATH }}  > /tmp/deploy_key.pem
+          chmod 600 /tmp/deploy_key.pem
+          ssh -i /tmp/deploy_key.pem ec2-user@13.127.189.205 \
           "cd /home/ec2-user/workspace/cicd-githubactions/dev && \
           git pull origin dev && \
           npm install"
@@ -40,9 +42,7 @@ jobs:
         run: |
           # Replace with your deployment commands for the prod environment
           echo "Deploying to the prod environment"
-          echo "${{ secrets.SSH_KEY_PATH }}" > /tmp/deploy_key.pem
-          chmod 600 /tmp/deploy_key.pem
-          ssh -i /tmp/deploy_key.pem ec2-user@13.127.189.205 \
+          ssh -i ${{ secrets.SSH_KEY_PATH }} ec2-user@13.127.189.205 \
           "cd /home/ec2-user/workspace/cicd-githubactions/prod && \
           git pull origin main && \
           npm install"
