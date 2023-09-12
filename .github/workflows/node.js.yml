@@ -42,7 +42,7 @@ jobs:
           echo "Deploying to the prod environment"
           echo "${{ secrets.SSH_KEY_PATH }}" > /tmp/deploy_key.pem
           chmod 600 /tmp/deploy_key.pem
-          ssh -o StrictHostKeyChecking=no -i /tmp/deploy_key.pem ec2-user@13.127.189.205 \
+          ssh -i /tmp/deploy_key.pem ec2-user@13.127.189.205 \
           "cd /home/ec2-user/workspace/cicd-githubactions/prod && \
           git pull origin main && \
           npm install"
