@@ -1,0 +1,48 @@
+name: Deploy on Push
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  build:
+    
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Deploy to Development
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          # Replace with your deployment commands for the dev environment
+          echo "Deploying to the dev environment"
+          ssh -i ${{ secrets.SSH_KEY_PATH }}  > /tmp/deploy_key.pem
+          chmod 600 /tmp/deploy_key.pem
+          ssh -i /tmp/deploy_key.pem ec2-user@13.127.189.205 \
+          "cd /home/ec2-user/workspace/cicd-githubactions/dev && \
+          git pull origin dev && \
+          npm install"
+
+      - name: Deploy to Production
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Replace with your deployment commands for the prod environment
+          echo "Deploying to the prod environment"
+          ssh -i ${{ secrets.SSH_KEY_PATH }} ec2-user@13.127.189.205 \
+          "cd /home/ec2-user/workspace/cicd-githubactions/prod && \
+          git pull origin main && \
+          npm install"
